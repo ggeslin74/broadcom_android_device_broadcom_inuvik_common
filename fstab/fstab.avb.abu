@@ -1,0 +1,14 @@
+*/block/sd*                     auto            auto     defaults                          voldmanaged=usb:auto,encryptable=userdata
+
+## /dev/block/by-name/boot         /boot           emmc     defaults                          recoveryonly,slotselect
+## /dev/block/by-name/vendor_boot  /vendor_boot    emmc     defaults                          recoveryonly,slotselect
+
+/dev/block/by-name/userdata     /data           f2fs     noatime,nosuid,nodev,reserve_root=32768 latemount,formattable,wait,check,quota,reservedsize=128M,fileencryption=aes-256-xts:aes-256-cts,fsverity,sysfs_path=/sys/devices/platform/rdb/84b1000.sdhci,keydirectory=/metadata/vold/metadata_encryption
+/dev/block/by-name/cache        /cache          ext4     noatime,nosuid,nodev              wait,formattable,check
+/dev/block/by-name/metadata     /metadata       ext4     noatime,nosuid,nodev,discard,sync wait,formattable,first_stage_mount,check
+/dev/block/by-name/misc         /misc           emmc     defaults                          defaults
+/dev/block/by-name/hwcfg        /dev/hwcfg      vfat     ro,noatime                        wait
+/dev/block/zram0                none            swap     defaults                          zramsize=209715200,notrim
+
+system                          /system         ext4     noatime,ro                        wait,avb=vbmeta,slotselect,logical,first_stage_mount,avb_keys=/avb/avb-testkey.avbpubkey
+vendor                          /vendor         ext4     noatime,ro                        wait,avb=vbmeta,slotselect,logical,first_stage_mount

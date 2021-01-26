@@ -1,0 +1,3 @@
+on init
+   symlink /dev/block/platform/rdb/84b1000.sdhci/by-name /dev/block/by-name
+

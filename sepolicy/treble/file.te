@@ -1,0 +1,3 @@
+type sysfs_sdhci_devices, sysfs_type, fs_type;
+type sysfs_mem_controller_devices, sysfs_type, fs_type;
+
