@@ -8,7 +8,7 @@
 /dev/block/by-name/metadata     /metadata       ext4     noatime,nosuid,nodev,discard,sync wait,formattable,first_stage_mount,check
 /dev/block/by-name/misc         /misc           emmc     defaults                          defaults
 /dev/block/by-name/hwcfg        /dev/hwcfg      vfat     ro,noatime                        wait
-/dev/block/zram0                none            swap     defaults                          zramsize=209715200,notrim
+/dev/block/zram0                none            swap     defaults                          zramsize=75%,zram_loopback_path=/data/per_boot/zram_swap,max_comp_streams=8
 
 system                          /system         ext4     noatime,ro                        wait,avb=vbmeta,slotselect,logical,first_stage_mount,avb_keys=/avb/avb-testkey.avbpubkey
 vendor                          /vendor         ext4     noatime,ro                        wait,avb=vbmeta,slotselect,logical,first_stage_mount

@@ -191,13 +191,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
    \
    ro.vendor.nx.capable.fe=1 \
    \
-   ro.oem.key1=ATV00100020
-
-# non tunnel mode hdr (eg. YT vp9.2|av01, Prime HEVC)
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.vendor.nx.med.vd_hdr_vp9ntnl=1 \
-   ro.vendor.nx.med.vd_hdr_hevcntnl=1 \
-   ro.vendor.nx.med.vd_hdr_av01ntnl=1
+   ro.oem.key1=ATV00100020 \
+   \
+   persist.sys.zram_enabled=1 \
+   ro.zram.mark_idle_delay_mins=20 \
+   ro.zram.first_wb_delay_mins=1440 \
+   ro.zram.periodic_wb_delay_hours=24
 
 ifneq (${LOCAL_SUBVAR_NRDP_STRICT},y)
 PRODUCT_PROPERTY_OVERRIDES += \
