@@ -131,7 +131,7 @@ HW_DTU_MODE_SUPPORT       := all
 HW_GPU_VULKAN_SUPPORT     := y
 
 LOCAL_DEVICE_BGRCPKT_PLANES := 2
-LOCAL_DEVICE_MKBOOTIMG_ARGS := --ramdisk_offset 0x42200000
+LOCAL_DEVICE_MKBOOTIMG_ARGS := --ramdisk_offset 0x41D00000
 
 # no encoder (for now).
 HW_ENCODER_SUPPORT        := n
