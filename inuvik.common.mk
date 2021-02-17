@@ -83,6 +83,7 @@ LOCAL_DEVICE_REFERENCE_BUILD := device/broadcom/inuvik/reference_build.mk
 HW_AB_UPDATE_SUPPORT      ?= y
 LOCAL_DEVICE_USE_VERITY   := y
 LOCAL_DEVICE_RTS_MODE     ?= 2
+HW_HVD_REDUX              ?= y
 LOCAL_DEVICE_BR_4_RTS     ?= 40
 BOLT_IMG_TO_USE_OVERRIDE  := bolt-ba.bin
 BROADCOM_WIFI_CHIPSET     := 4375b1
@@ -95,16 +96,22 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/broadcom/inuvik-common/blu
 LOCAL_DEVICE_POWER_GOV    ?= cs
 LOCAL_SECDMA_SIZE_MB      := 32
 ANDROID_ENABLE_DHD_SECDMA := n
+ifeq ($(HW_HVD_REDUX),y)
 LOCAL_HEAP_MAIN_SIZE_MB   ?= 148
 LOCAL_HEAP_GFX_SIZE_MB    ?= 40
+LOCAL_HEAP_CRR_SIZE_MB    ?= 80
+else
+LOCAL_HEAP_MAIN_SIZE_MB   ?= 112
+LOCAL_HEAP_GFX_SIZE_MB    ?= 48
 LOCAL_HEAP_CRR_SIZE_MB    ?= 64
+endif
+
 
 LOCAL_DEVICE_PAK_BINARY_DEV  := pak.7218.zd.bin
 LOCAL_DEVICE_PAK_BINARY_PROD := pak.7218.zb.bin
 
 # no legacy decoder (vp8, h263, mpeg4) in hardware v.1
 HW_HVD_REVISION           := V
-HW_HVD_REDUX              ?= y
 # 4k alignment required for raaga buffers
 HW_RAAGA_ALIGNMENT        := 4096
 # v3d mmu available.
@@ -165,12 +172,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.vendor.nx.heap.main=${LOCAL_HEAP_MAIN_SIZE_MB}m \
    ro.vendor.nx.heap.gfx=${LOCAL_HEAP_GFX_SIZE_MB}m \
    \
-   ro.vendor.nx.trim.pip=0 \
-   ro.vendor.nx.trim.pip.qr=1 \
-   ro.vendor.nx.trim.mosaic=0 \
-   ro.vendor.nx.trim.mtg=0 \
-   ro.vendor.nx.trim.disp=0 \
-   \
    ro.vendor.nx.capable.dtu=1 \
    ro.vendor.nx.dtu.all=0 \
    ro.vendor.nx.dtu.pbuf0.addr=0x0 \
@@ -197,6 +198,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.zram.mark_idle_delay_mins=20 \
    ro.zram.first_wb_delay_mins=1440 \
    ro.zram.periodic_wb_delay_hours=24
+
+ifeq ($(HW_HVD_REDUX),y)
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.vendor.nx.trim.pip=0 \
+   ro.vendor.nx.trim.pip.qr=1 \
+   ro.vendor.nx.trim.mosaic=0 \
+   ro.vendor.nx.trim.mtg=0 \
+   ro.vendor.nx.trim.disp=0
+endif
 
 ifneq (${LOCAL_SUBVAR_NRDP_STRICT},y)
 PRODUCT_PROPERTY_OVERRIDES += \
