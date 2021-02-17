@@ -30,6 +30,8 @@ LOCAL_ARM_AARCH64_COMPAT_32_BIT ?= y
 LOCAL_DEVICE_FRAGMENT ?= ott
 include device/broadcom/inuvik-common/fragments/${LOCAL_DEVICE_FRAGMENT}.mk
 
+HW_HVD_REDUX              ?= y
+
 # compile the rc's for the device.
 LOCAL_DEVICE_RCS                 := device/broadcom/common/rcs/init.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.inuvik.rc
 ifeq (${HW_VENDOR_RAMDISK_SUPPORT},y)
@@ -70,7 +72,11 @@ else
 LOCAL_DEVICE_MEDIA               := device/broadcom/common/media/media_codecs_with_av1__no_legacy_enc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
 endif
 LOCAL_DEVICE_MEDIA               += device/broadcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+ifeq ($(HW_HVD_REDUX),y)
 LOCAL_DEVICE_MEDIA               += device/broadcom/inuvik-common/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
+else
+LOCAL_DEVICE_MEDIA               += device/broadcom/inuvik-common/media_codecs_performance_no_pip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
+endif
 
 LOCAL_DEVICE_SEPOLICY_BLOCK      := device/broadcom/inuvik-common/sepolicy/block
 LOCAL_DEVICE_SEPOLICY_BLOCK      += device/broadcom/inuvik-common/sepolicy/treble
@@ -83,7 +89,6 @@ LOCAL_DEVICE_REFERENCE_BUILD := device/broadcom/inuvik/reference_build.mk
 HW_AB_UPDATE_SUPPORT      ?= y
 LOCAL_DEVICE_USE_VERITY   := y
 LOCAL_DEVICE_RTS_MODE     ?= 2
-HW_HVD_REDUX              ?= y
 LOCAL_DEVICE_BR_4_RTS     ?= 40
 BOLT_IMG_TO_USE_OVERRIDE  := bolt-ba.bin
 BROADCOM_WIFI_CHIPSET     := 4375b1
