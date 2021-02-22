@@ -47,7 +47,11 @@ LOCAL_DEVICE_RCS                 += device/broadcom/common/rcs/ueventd.rc:$(TARG
 LOCAL_DEVICE_RCS                 += device/broadcom/common/rcs/${LOCAL_FS_INIT_SETUP}:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.fs.rc
 LOCAL_DEVICE_RCS                 += device/broadcom/inuvik-common/rcs/init.block-zram.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.block.rc
 LOCAL_DEVICE_RCS                 += device/broadcom/inuvik-common/rcs/init.bcm.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.bcm.usb.rc
-LOCAL_DEVICE_RCS                 += device/broadcom/common/rcs/init.mem.tune.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mem.tune.rc
+ifeq ($(LOCAL_LINUX_VERSION_NODASH),5.4)
+LOCAL_DEVICE_RCS                 += device/broadcom/common/rcs/init.mem.tune_v2.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mem.tune.rc
+else
+LOCAL_DEVICE_RCS                 += device/broadcom/common/rcs/init.mem.tune_v1.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mem.tune.rc
+endif
 
 LOCAL_DEVICE_RECOVERY_RCS        := device/broadcom/common/rcs/init.recovery.rc:root/init.recovery.inuvik.rc
 LOCAL_DEVICE_RECOVERY_RCS        += device/broadcom/inuvik-common/rcs/init.block-zram.rc:root/init.recovery.block.rc
