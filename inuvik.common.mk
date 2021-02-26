@@ -204,6 +204,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.zram.first_wb_delay_mins=1440 \
    ro.zram.periodic_wb_delay_hours=24
 
+# non tunnel mode hdr (eg. YT vp9.2, Prime HEVC)
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.vendor.nx.med.vd_hdr_vp9ntnl=1 \
+   ro.vendor.nx.med.vd_hdr_hevcntnl=1
+
 ifeq ($(HW_HVD_REDUX),y)
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.vendor.nx.trim.pip=0 \
