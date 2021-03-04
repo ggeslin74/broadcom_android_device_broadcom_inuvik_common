@@ -1,4 +1,1 @@
-/vendor/lib(64)?/hw/gralloc\.inuvik\.so                      u:object_r:same_process_hal_file:s0
-
-/vendor/lib(64)?/hw/vulkan\.inuvik\.so                       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libbcmvulkan_icd\.so                        u:object_r:same_process_hal_file:s0

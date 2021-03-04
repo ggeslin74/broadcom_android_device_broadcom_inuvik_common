@@ -12,7 +12,8 @@ LOCAL_CFG_PROFILE         ?= default
 LOCAL_DEVICE_USE_AVB      := y
 HW_SUPER_SUPPORT          := y
 LOCAL_DEVICE_SEPOLICY_IOCTL ?= nvk
-LOCAL_DEVICE_SEPOLICY_BLOCK_INSTANCE ?= device/broadcom/inuvik/sepolicy/treble/${LOCAL_DEVICE_SEPOLICY_IOCTL}
+LOCAL_DEVICE_SEPOLICY_BLOCK_INSTANCE ?= device/broadcom/inuvik/sepolicy/treble \
+                                        device/broadcom/inuvik/sepolicy/treble/${LOCAL_DEVICE_SEPOLICY_IOCTL}
 LOCAL_NEXUS_SPI_USE       := y
 LOCAL_FSTAB_DEFINITION    ?= fstab.avb.abu
 LOCAL_FS_INIT_SETUP       ?= init.fs.metaenc.rc
