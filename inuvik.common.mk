@@ -18,6 +18,9 @@ LOCAL_NEXUS_SPI_USE       := y
 LOCAL_FSTAB_DEFINITION    ?= fstab.avb.abu
 LOCAL_FS_INIT_SETUP       ?= init.fs.metaenc.rc
 
+# no legacy decoder (vp8, h263, mpeg4) in hardware v.1
+HW_HVD_REVISION           := V
+
 LOCAL_DEVICE_SAGE_DEV_N_PROD ?= y
 LOCAL_DEVICE_BOOTLOADER_DEV ?= y
 LOCAL_DEVICE_BOOTLOADER_PROD ?= ZB
@@ -68,9 +71,9 @@ endif
 
 # compile the media codecs for the device.
 ifeq ($(LOCAL_ARM_TRUSTZONE_USE),y)
-LOCAL_DEVICE_MEDIA               := device/broadcom/common/media/media_codecs_with_av1__no_legacy_enc__no_sec_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
+LOCAL_DEVICE_MEDIA               := device/broadcom/common/media/codec/hvdV/media_codecs_base__no_sec_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
 else
-LOCAL_DEVICE_MEDIA               := device/broadcom/common/media/media_codecs_with_av1__no_legacy_enc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
+LOCAL_DEVICE_MEDIA               := device/broadcom/common/media/codec/hvdV/media_codecs_base.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
 endif
 LOCAL_DEVICE_MEDIA               += device/broadcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 ifeq ($(HW_HVD_REDUX),y)
@@ -116,8 +119,6 @@ endif
 LOCAL_DEVICE_PAK_BINARY_DEV  := pak.7218.zd.bin
 LOCAL_DEVICE_PAK_BINARY_PROD := pak.7218.zb.bin
 
-# no legacy decoder (vp8, h263, mpeg4) in hardware v.1
-HW_HVD_REVISION           := V
 # 4k alignment required for raaga buffers
 HW_RAAGA_ALIGNMENT        := 4096
 # v3d mmu available.
